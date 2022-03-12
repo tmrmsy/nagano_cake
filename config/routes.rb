@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
   namespace :admin do
-    resources :genres, only: [:index, :edit, :create]
+    resources :genres, only: [:index, :edit, :create, :update]
   end
   namespace :admin do
     root to: 'homes#top'
   end
   #devise_for :admins
- 
-  
+
+
   devise_scope :admin do
     get 'admin/sign_in', to: 'admin/sessions#new', as: 'admin_session'
     post 'admin/sign_in', to: 'admin/sessions#create'
