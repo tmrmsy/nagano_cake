@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :admin do
-    resources :items, only: [:new, :create, :index, :show, :edit]
+    resources :items, only: [:new, :create, :index, :show, :edit, :update]
   end
   namespace :admin do
     resources :genres, only: [:index, :edit, :create, :update]
@@ -8,9 +8,8 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'homes#top'
   end
-  #devise_for :admins
 
-
+  devise_for :admins, skip: :all
   devise_scope :admin do
     get 'admin/sign_in', to: 'admin/sessions#new', as: 'admin_session'
     post 'admin/sign_in', to: 'admin/sessions#create'
