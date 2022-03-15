@@ -5,18 +5,25 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <main>
-      <header>
-        <ul>
-          <li><%= link_to 'ログイン', admin_session_path %></li>
-          <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
-        </ul>
+      <header class="shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <% if admin_signed_in? %>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><%= link_to '商品一覧', admin_items_path, class: 'nav-link text-dark' %></li>
+              <li class="nav-item"><%= link_to '会員一覧', admin_customers_path, class: 'nav-link text-dark' %></li>
+              <li class="nav-item"><%= link_to 'ジャンル一覧', admin_genres_path, class: 'nav-link text-dark' %></li>
+              <li class="nav-item"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %></li>
+            </ul>
+           <% end %>
+        </nav>
       </header>
       <footer></footer>
     </main>

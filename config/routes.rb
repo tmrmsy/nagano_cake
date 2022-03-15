@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   devise_for :customers
   
   namespace :admin do
-    resources :orders, only: [:show]
+    resources :orders, only: [:show, :update]
   end
 
   namespace :admin do
