@@ -1,33 +1,34 @@
 Rails.application.routes.draw do
 
-  namespace :public do
+  scope module: :public do
+    root to: 'homes#top'
+    get 'homes/about'
+  end
+  scope module: :public do
     get 'orders/new'
     get 'orders/index'
     get 'orders/show'
     get 'orders/complete'
   end
-  namespace :public do
+  scope module: :public do
     get 'cart_items/index'
   end
-  namespace :public do
+  scope module: :public do
     get 'customers/show'
     get 'customers/edit'
     get 'customers/withdrawal'
   end
-  namespace :public do
+  scope module: :public do
     get 'items/index'
     get 'items/show'
   end
-  namespace :public do
-    get 'homes/top'
-    get 'homes/about'
-  end
-  namespace :public do
+
+  scope module: :public do
     get 'addresses/index'
     get 'addresses/edit'
   end
   devise_for :customers
-  
+
   namespace :admin do
     resources :orders, only: [:show, :update]
   end
