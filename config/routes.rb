@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: 'homes#top'
-    get 'homes/about'
+    get 'about' => 'homes#about', as: 'about'
   end
   scope module: :public do
     get 'orders/new'
@@ -14,8 +14,7 @@ Rails.application.routes.draw do
     get 'cart_items/index'
   end
   scope module: :public do
-    get 'customers/show'
-    get 'customers/edit'
+    resource :customers , only: [:show, :edit]
     get 'customers/withdrawal'
   end
   scope module: :public do
