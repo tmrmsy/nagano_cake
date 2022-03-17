@@ -14,8 +14,8 @@ Rails.application.routes.draw do
     get 'cart_items/index'
   end
   scope module: :public do
-    resource :customers , only: [:show, :edit]
-    get 'customers/withdrawal'
+    resource :customers , only: [:show, :edit, :update]
+    get 'customers/withdrawal' => 'customers#withdrawal', as: 'withdrawal'
   end
   scope module: :public do
     get 'items/index'
@@ -26,7 +26,11 @@ Rails.application.routes.draw do
     get 'addresses/index'
     get 'addresses/edit'
   end
-  devise_for :customers
+
+  devise_for :customers, skip: [:passwords], controllers: {
+  registrations: "public/registrations",
+  sessions: 'public/sessions'
+}
 
   namespace :admin do
     resources :orders, only: [:show, :update]
@@ -48,12 +52,9 @@ Rails.application.routes.draw do
     root to: 'homes#top'
   end
 
-  devise_for :admins, skip: :all
-  devise_scope :admin do
-    get 'admin/sign_in', to: 'admin/sessions#new', as: 'admin_session'
-    post 'admin/sign_in', to: 'admin/sessions#create'
-    delete 'admin/sign_out', to: 'admin/sessions#destroy', as: 'destroy_admin_session'
-  end
+  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+  sessions: "admin/sessions"
+  }
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
