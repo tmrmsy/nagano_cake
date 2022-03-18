@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   scope module: :public do
     resource :customers , only: [:show, :edit, :update]
     get 'customers/withdrawal' => 'customers#withdrawal', as: 'withdrawal'
+    patch 'customers/withdrawal' => 'customers#perform', as: 'perform'
   end
   scope module: :public do
     get 'items/index'

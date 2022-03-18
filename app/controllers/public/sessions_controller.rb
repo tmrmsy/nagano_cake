@@ -26,7 +26,7 @@ class Public::SessionsController < Devise::SessionsController
      return if !@customer
 
      if @customer.valid_password?(params[:customer][:password])
-       if @customer.is_active == false
+       if @customer.is_deleted == true
          redirect_to new_customer_registration_path
        end
      end
