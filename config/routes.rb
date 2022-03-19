@@ -19,13 +19,11 @@ Rails.application.routes.draw do
     patch 'customers/withdrawal' => 'customers#perform', as: 'perform'
   end
   scope module: :public do
-    get 'items/index'
-    get 'items/show'
+    resources :items, only: [:index, :show]
   end
 
   scope module: :public do
-    get 'addresses/index'
-    get 'addresses/edit'
+    resources :addresses, only: [:index, :create, :edit, :update, :destroy]
   end
 
   devise_for :customers, skip: [:passwords], controllers: {
