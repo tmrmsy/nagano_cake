@@ -4,20 +4,25 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get 'about' => 'homes#about', as: 'about'
   end
+
   scope module: :public do
     get 'orders/new'
     get 'orders/index'
     get 'orders/show'
     get 'orders/complete'
   end
+
   scope module: :public do
-    get 'cart_items/index'
+    resources :cart_items, only: [:index, :create, :update, :destroy]
+  delete 'cart_items' => 'cart_items#destroys', as: 'destroys_cart_items'
   end
+
   scope module: :public do
     resource :customers , only: [:show, :edit, :update]
     get 'customers/withdrawal' => 'customers#withdrawal', as: 'withdrawal'
     patch 'customers/withdrawal' => 'customers#perform', as: 'perform'
   end
+
   scope module: :public do
     resources :items, only: [:index, :show]
   end

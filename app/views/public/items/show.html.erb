@@ -5,7 +5,15 @@
        <%= image_tag @item.image, width: '200', height: '200' %>
        <h4><%= @item.name %></h4>
        <span><%= @item.introduction %></span><br>
-       <span>¥<%= @item.price %><span>(税込)</span></span>
+       <span>¥<%= @item.price.to_s(:delimited) %><span>(税込)</span></span>
+
+        <%= form_with model: CartItem, url: cart_items_path do |f| %>
+         <%= f.select :amount, *[1..10]  %>
+         <%= f.hidden_field :item_id, :value => @item.id %>
+         <%= f.hidden_field :customer_id, :value => current_customer.id %>
+         <%= f.submit 'カートに入れる', class: 'btn btn-success' %>
+        <% end %>
+
 
     </div>
   </div>
