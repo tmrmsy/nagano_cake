@@ -6,9 +6,7 @@ Rails.application.routes.draw do
   end
 
   scope module: :public do
-    get 'orders/new'
-    get 'orders/index'
-    get 'orders/show'
+    resources :orders, only: [:new, :create, :update, :index, :show]
     get 'orders/complete'
   end
 
