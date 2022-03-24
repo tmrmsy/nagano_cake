@@ -4,13 +4,17 @@
       <h5>注文情報入力</h5>
       <%= form_with model: @order, url: orders_path do |f| %>
         <label>支払方法</label><br>
-        <%= f.radio_button :payment_method, "credit_card" %>
-        <%= f.label :payment_method, "クレジットカード" %><br>
+        <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+        <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %>
 
-        <%= f.radio_button :payment_method, "transfer" %>
-        <%= f.label :payment_method, "銀行振込" %><br>
+        <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+        <%= f.label :payment_method, Order.payment_methods_i18n[:transfer]%><br>
 
         <label>お届け先</label><br>
+        <%= f.radio_button :shipping_address, current_customer.address, checked: true %>
+        <%= f.label :address, "ご自身の住所" %><br>
+        
+
         <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %>
       <% end %>
     </div>

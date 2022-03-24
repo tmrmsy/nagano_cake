@@ -6,6 +6,7 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
+    #cart_items = CartItem.all
     cart_item = CartItem.new(cart_item_params)
     cart_item.customer_id = current_customer.id
     cart_item.save
@@ -26,11 +27,7 @@ class Public::CartItemsController < ApplicationController
 
   def destroys
     cart_items = CartItem.all
-    cart_items.each do |cart_item|
-      if cart_item.customer_id == current_customer.id
-        cart_item.destroy
-      end
-    end
+    current_customer.cart_items.destroy_all
     redirect_to cart_items_path
   end
 
