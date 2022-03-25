@@ -1,8 +1,8 @@
 class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
-    
-    @order.customer_id = current_customer.id
+    @current_address = "〒" + current_customer.postal_code + " " + current_customer.address + " " + current_customer.last_name + current_customer.first_name
+    #@order.customer_id = current_customer.id
   end
 
   def create
