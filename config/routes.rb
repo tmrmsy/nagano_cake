@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     resources :orders, only: [:new, :create, :update, :index, :show]
-    get 'orders/complete'
+    get 'orders/complete' => 'orders#complete', as: 'complete'
   end
 
   scope module: :public do
