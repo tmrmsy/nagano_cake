@@ -16,7 +16,7 @@ class Public::CustomersController < ApplicationController
   def withdrawal
   end
 
-  def perform
+  def disposal
     customer = current_customer
     customer.update(is_deleted: true)
     reset_session

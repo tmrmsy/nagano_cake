@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   end
 
   scope module: :public do
-    resources :orders, only: [:new, :create, :update, :index, :show]
+    resources :orders, only: [:new, :create, :update, :index]
     get 'orders/complete' => 'orders#complete', as: 'complete'
+    post 'orders/confirm' => 'orders#confirm', as: 'confirm'
   end
 
   scope module: :public do
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
   scope module: :public do
     resource :customers , only: [:show, :edit, :update]
     get 'customers/withdrawal' => 'customers#withdrawal', as: 'withdrawal'
-    patch 'customers/withdrawal' => 'customers#perform', as: 'perform'
+    patch 'customers/disposal' => 'customers#disposal', as: 'disposal'
   end
 
   scope module: :public do
