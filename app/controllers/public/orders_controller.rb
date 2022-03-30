@@ -30,13 +30,12 @@ class Public::OrdersController < ApplicationController
   def create
    @order = Order.new(order_params)
    @order.save
-   current_customer.cart_items.each do |item|
+   current_customer.cart_items.each do |cart_item|
     order_detail = OrderDetail.new
     order_detail.order_id = @order.id
-    order_detail.item_id = item.id
-    order_detail.amount = item.amount
-    order_detail.price = item.item.with_tax_price * item.amount
-    #binding.pry
+    order_detail.item_id = cart_item.item_id
+    order_detail.amount = cart_item.amount
+    order_detail.price = cart_item.item.with_tax_price * cart_item.amount
     order_detail.save
   end
   current_customer.cart_items.destroy_all
@@ -46,10 +45,12 @@ class Public::OrdersController < ApplicationController
   def complete
   end
 
-  def show
+  def index
+    @orders = Order.all
+    @order_details = OrderDetail.all
   end
 
-  def index
+  def show
   end
 
   private
