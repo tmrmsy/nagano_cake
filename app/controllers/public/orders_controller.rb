@@ -8,6 +8,7 @@ class Public::OrdersController < ApplicationController
   def confirm
     @order = Order.new(order_params)
     @order.postage = 800
+    @order.amount_billed = 800
     @total = 0
     if params[:order][:select_address] == "0"
       @order.shipping_postal_code = current_customer.postal_code
@@ -35,7 +36,7 @@ class Public::OrdersController < ApplicationController
     order_detail.order_id = @order.id
     order_detail.item_id = cart_item.item_id
     order_detail.amount = cart_item.amount
-    order_detail.price = cart_item.item.with_tax_price * cart_item.amount
+    order_detail.price = cart_item.item.with_tax_price
     order_detail.save
   end
   current_customer.cart_items.destroy_all
@@ -48,9 +49,11 @@ class Public::OrdersController < ApplicationController
   def index
     @orders = Order.all
     @order_details = OrderDetail.all
+    @total = 0
   end
 
   def show
+    @order = Order.find(params[:id])
   end
 
   private

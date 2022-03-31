@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   scope module: :public do
-    resources :orders, only: [:new, :create, :update, :index]
+    resources :orders, only: [:new, :create, :update, :index, :show]
     get 'orders/complete' => 'orders#complete', as: 'complete'
     post 'orders/confirm' => 'orders#confirm', as: 'confirm'
   end
