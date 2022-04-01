@@ -20,15 +20,17 @@
               <td><%= order.created_at.to_s(:datetime_jp) %></td>
               <td><%= order.shipping_address_display %></td>
               <td>
-                <% @order_details.each do |order_detail| %>
-                  <% if order_detail.order_id == order.id %>
-                    <%= order_detail.item.name %><br>
-                    <% @total += order_detail.price * order_detail.amount %>
+                <% @order_details.each do |order_item| %>
+                  <% if order_item.order_id == order.id %>
+                    <%= order_item.item.name %><br>
+                    <% @total += order_item.price * order_item.amount %>
                   <% end %>
                 <% end %>
               </td>
               <td><%= @total.to_s(:delimited) %></td>
-              <td><br></td>
+              <td>
+                <%= @order_details.find_by(order_id: order.id).making_status_i18n %>
+              </td>
               <td><%= link_to '表示する', order_path(order.id), class: 'btn btn-primary' %></td>
             </tr>
           <% end %>

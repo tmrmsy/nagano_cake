@@ -54,6 +54,10 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @order.postage = 800
+    @order_details = OrderDetail.all
+    @total = 0
+    
   end
 
   private
