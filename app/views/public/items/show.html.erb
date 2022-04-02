@@ -5,7 +5,7 @@
        <%= image_tag @item.image, width: '200', height: '200' %>
        <h4><%= @item.name %></h4>
        <span><%= @item.introduction %></span><br>
-       <span>¥<%= @item.price.to_s(:delimited) %><span>(税込)</span></span>
+       <span>¥<%= @item.with_tax_price.to_s(:delimited) %><span>(税込)</span></span>
 
         <%= form_with model: CartItem, url: cart_items_path do |f| %>
          <%= f.select :amount, *[1..10]  %>

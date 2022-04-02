@@ -8,7 +8,7 @@
           <%= link_to item_path(item.id) do %>
             <%= image_tag item.image, width: '150', height: '150' %><br>
             <label><%= item.name %></label><br>
-            <label>¥<%= item.price %></label>
+            <label>¥<%= item.with_tax_price.to_s(:delimited) %></label>
           <% end %>
         </div>
       <% end %>
