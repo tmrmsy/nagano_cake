@@ -22,11 +22,11 @@
               <td>
                 <% @order_details.each do |order_detail| %>
                   <% if order_detail.order_id == order.id %>
-                    <% @amount += order_detail.amount %>
+                    <%=  %>
                   <% end %>
                 <% end %>
-                <%= @amount %>
               </td>
+              <td><%= order.order_status_i18n %></td>
             </tr>
             <% end %>
         </tbody>

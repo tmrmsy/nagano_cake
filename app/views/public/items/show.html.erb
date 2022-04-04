@@ -8,10 +8,12 @@
        <span>¥<%= @item.with_tax_price.to_s(:delimited) %><span>(税込)</span></span>
 
         <%= form_with model: CartItem, url: cart_items_path do |f| %>
-         <%= f.select :amount, *[1..10]  %>
-         <%= f.hidden_field :item_id, :value => @item.id %>
-         <%= f.hidden_field :customer_id, :value => current_customer.id %>
-         <%= f.submit 'カートに入れる', class: 'btn btn-success' %>
+          <%= f.select :amount, *[1..10]  %>
+          <%= f.hidden_field :item_id, :value => @item.id %>
+          <% if customer_signed_in? %>
+            <%= f.hidden_field :customer_id, :value => current_customer.id %>
+          <% end %>
+          <%= f.submit 'カートに入れる', class: 'btn btn-success' %>
         <% end %>
     </div>
   </div>

@@ -1,4 +1,5 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_customer!
 
   def new
     @order = Order.new
@@ -22,9 +23,6 @@ class Public::OrdersController < ApplicationController
       @order.shipping_name = @address.name
 
     elsif params[:order][:select_address] == "2"
-
-    else
-      render :new
     end
   end
 
@@ -39,8 +37,8 @@ class Public::OrdersController < ApplicationController
     order_detail.price = cart_item.item.with_tax_price
     order_detail.save
   end
-  current_customer.cart_items.destroy_all
-   redirect_to complete_path
+    current_customer.cart_items.destroy_all
+    redirect_to complete_path
   end
 
   def complete
@@ -57,7 +55,7 @@ class Public::OrdersController < ApplicationController
     @order.postage = 800
     @order_details = OrderDetail.all
     @total = 0
-    
+
   end
 
   private
