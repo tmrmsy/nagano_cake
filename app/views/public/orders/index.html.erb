@@ -24,11 +24,16 @@
                   <% @order_details.each do |order_item| %>
                     <% if order_item.order_id == order.id %>
                       <%= order_item.item.name %><br>
-                      <% @total += order_item.price * order_item.amount %>
                     <% end %>
                   <% end %>
                 </td>
-                <td><%= @total.to_s(:delimited) %></td>
+                <td>
+                  <% @total = 0 %>
+                  <% @order_details.where(order_id: order.id).each do |order_detail| %>
+                    <% @total += order_detail.subtotal %>
+                  <% end %>
+                  <%= @total.to_s(:delimited) %>
+                </td>
                 <td>
                   <%= order.order_status_i18n %>
                 </td>

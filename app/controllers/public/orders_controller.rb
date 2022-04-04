@@ -47,7 +47,6 @@ class Public::OrdersController < ApplicationController
   def index
     @orders = Order.all
     @order_details = OrderDetail.all
-    @total = 0
   end
 
   def show

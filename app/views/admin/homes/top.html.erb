@@ -20,11 +20,7 @@
               </td>
               <td><%= order.customer.last_name + order.customer.first_name %></td>
               <td>
-                <% @order_details.each do |order_detail| %>
-                  <% if order_detail.order_id == order.id %>
-                    <%=  %>
-                  <% end %>
-                <% end %>
+                <%= @order_details.where(order_id: order.id).sum(:amount) %>
               </td>
               <td><%= order.order_status_i18n %></td>
             </tr>
