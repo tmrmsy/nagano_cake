@@ -1,2 +1,25 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h2>ようこそ<strong>ながのCAKE</strong>へ！</h2>
+            <p>このサイトは、ケーキ販売のECサイトになります。</p>
+            <p>会員でない方も商品を閲覧はできますが、</p>
+            <p>購入には会員登録が必要になります。</p>
+        </div>
+    </div>
+    <div class="row">
+        <h4>新着商品</h4>
+    </div>
+    <div class="row">
+        <div class="d-flex">
+            <% @items.first(4).each do |item| %>
+                <%= link_to item_path(item.id) do %>
+                    <%= image_tag item.image, width: '150', height: '150' %><br>
+                    <label><%= item.name %></label><br>
+                    <span>¥<%= item.with_tax_price.to_s(:delimited) %></span><br>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+    <%= link_to '全ての商品を見る>', items_path %>
+</div>
