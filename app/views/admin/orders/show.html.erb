@@ -16,7 +16,7 @@
 
       <label>注文ステータス</label>
       <%= form_with model: @order, url: admin_order_path(@order.id) do |f| %>
-        <%= f.select :order_status, Order.order_statuses.keys.to_a, {} %>
+        <%= f.select :order_status, Order.order_statuses.keys.map {|k| [I18n.t("enums.order.order_status.#{k}"), k]} %>
         <%= f.submit '更新', class: 'btn btn-success' %>
       <% end %>
 
@@ -40,8 +40,8 @@
                 <td><%= order_detail.subtotal.to_s(:delimited) %></td>
                 <% @total += order_detail.subtotal %>
                 <td>
-                  <%= form_with model: order_detail, url: admin_order_path(@order.id) do |f| %>
-                  <%= f.select :making_status, OrderDetail.making_statuses_i18n.keys.to_a, {} %>
+                  <%= form_with model: order_detail, url: admin_production_path(order_detail.id) do |f| %>
+                    <%= f.select :making_status, OrderDetail.making_statuses.keys.map {|k| [I18n.t("enums.order_detail.making_status.#{k}"), k]} %>
                     <%= f.submit '更新', class: 'btn btn-success' %>
                   <% end %>
                 </td>
