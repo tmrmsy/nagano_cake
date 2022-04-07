@@ -40,6 +40,10 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :productions, only: [:update]
+  end
+
+  namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]
   end
 

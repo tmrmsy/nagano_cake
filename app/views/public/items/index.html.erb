@@ -3,13 +3,15 @@
   <label>(全<%= Item.count %>件)</label>
   <div class="row">
     <% @items.each do |item| %>
-      <div class="col-md-3">
-        <%= link_to item_path(item.id) do %>
-          <%= image_tag item.image, width: '150', height: '150' %><br>
-          <label><%= item.name %></label><br>
-          <label>¥<%= item.with_tax_price.to_s(:delimited) %></label>
-        <% end %>
-      </div>
+      <% if item.is_active %>
+        <div class="col-md-3">
+          <%= link_to item_path(item.id) do %>
+            <%= image_tag item.image, width: '150', height: '150' %><br>
+            <label><%= item.name %></label><br>
+            <label>¥<%= item.with_tax_price.to_s(:delimited) %></label>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
   </div>
   <%= paginate @items %>
