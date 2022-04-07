@@ -1,8 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3"></div>
-    <div class="col-md-9">
+    <div class="col-md-4">
        <%= image_tag @item.image, width: '200', height: '200' %>
+    </div>
+    <div class="col-md-4">
        <h4><%= @item.name %></h4>
        <span><%= @item.introduction %></span><br>
        <span>¥<%= @item.with_tax_price.to_s(:delimited) %><span>(税込)</span></span>
